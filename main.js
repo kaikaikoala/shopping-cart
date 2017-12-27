@@ -33,14 +33,37 @@ class Item{
 
     //return bool if this similar to base price
     //take base-price object as parameter
-    compare( baseArr ){
+    compare( base ){
+        var myBool = false ;
+        //check product-type matches
+        if( this["product-type"] == base["product-type"] ){
+            //check options match
+            for( const prop in base.options ){
+                if( base.options[prop].includes(this.options[prop]) ){
+                    myBool = true ;
+                }
+                else{
+                    myBool = false ;
+                    break ;
+                }
+            }//end of for in
+        }//end of if
+        return myBool ;
     }
 
     //return int
     //take base-price object for base-price as paramter
+    /*
     cost( baseArr ){
-        // ( base-price + artist-markup ) * quantity
+        var myBool = false ;
+        var i ;
+        for( i = 0 ; i < baseArr.length && !myBool ; ++i ){
+            myBool = this.compare( baseArr[i] ) ;
+        }
+        //this math thing
+        return ( baseArr[i]["base-price"] + this["artist-markup"] ) * this.quantity ;
     }
+    */
 }
 
 //"composite"
@@ -56,14 +79,25 @@ class Cart{
     print(){
         this.itemArr.forEach( function( item ){ item.print() } ) ;
     }
+
+    /*
+    cost( baseArr ){
+        var price = 0 ;
+        for( var i = 0 ; i < this.itemArr.length ; ++i ){
+            price += this.itemArr[i].cost( baseArr ) ;
+        }
+        return price ;
+    }
+    */
 }
 
 var myCart = new Cart( JSON.parse(readFile( process.argv[2])) ) ;
 var myBasePrice = JSON.parse(readFile(process.argv[3]));
-/*
-console.log( myCart[0]['product-type'] ) ;
-console.log( myBasePrice[0]['product-type'] ) ;
-*/
 myCart.print() ;
+
+console.log( myCart.itemArr[0].compare( myBasePrice[0] ) ) ;
+console.log( myCart.itemArr[0].compare( myBasePrice[1] ) ) ;
+console.log( myCart.itemArr[0].compare( myBasePrice[7] ) ) ;
+
 
 

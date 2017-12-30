@@ -64,10 +64,6 @@ class Item{
             }
         }
         //this math thing
-        this.print() ;
-        console.log( baseArr[i]["base-price"] ) ;
-        console.log( baseArr[i]["product-type"] ) ;
-        console.log( baseArr[i]["options"] ) ;
         return ( baseArr[i]["base-price"] + this["artist-markup"] ) * this.quantity ;
     }
 }
@@ -86,7 +82,6 @@ class Cart{
         this.itemArr.forEach( function( item ){ item.print() } ) ;
     }
 
-    /*
     cost( baseArr ){
         var price = 0 ;
         for( var i = 0 ; i < this.itemArr.length ; ++i ){
@@ -94,13 +89,12 @@ class Cart{
         }
         return price ;
     }
-    */
 }
 
 var myCart = new Cart( JSON.parse(readFile( process.argv[2])) ) ;
 var myBasePrice = JSON.parse(readFile(process.argv[3]));
 
-console.log( myCart.itemArr[0].cost( myBasePrice ) ) ;
+console.log( myCart.cost( myBasePrice ) ) ;
 
 
 

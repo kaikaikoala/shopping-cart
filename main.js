@@ -64,7 +64,8 @@ class Item{
             }
         }
         //this math thing
-        return ( baseArr[i]["base-price"] + this["artist-markup"] ) * this.quantity ;
+        //quantity ( base_price + round( base_price*artist_markup ) )
+        return ( baseArr[i]["base-price"] + Math.round(baseArr[i]["base-price"] * this["artist-markup"]/100 )) * this.quantity ;
     }
 }
 
@@ -95,7 +96,4 @@ var myCart = new Cart( JSON.parse(readFile( process.argv[2])) ) ;
 var myBasePrice = JSON.parse(readFile(process.argv[3]));
 
 console.log( myCart.cost( myBasePrice ) ) ;
-
-
-
 

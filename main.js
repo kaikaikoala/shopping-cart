@@ -53,17 +53,23 @@ class Item{
 
     //return int
     //take base-price object for base-price as paramter
-    /*
     cost( baseArr ){
-        var myBool = false ;
-        var i ;
-        for( i = 0 ; i < baseArr.length && !myBool ; ++i ){
-            myBool = this.compare( baseArr[i] ) ;
+        var i = 0 ;
+        while( i < baseArr.length ){
+            if( !this.compare( baseArr[i] ) ){
+                ++i ;
+            }
+            else{
+                break;
+            }
         }
         //this math thing
+        this.print() ;
+        console.log( baseArr[i]["base-price"] ) ;
+        console.log( baseArr[i]["product-type"] ) ;
+        console.log( baseArr[i]["options"] ) ;
         return ( baseArr[i]["base-price"] + this["artist-markup"] ) * this.quantity ;
     }
-    */
 }
 
 //"composite"
@@ -93,11 +99,9 @@ class Cart{
 
 var myCart = new Cart( JSON.parse(readFile( process.argv[2])) ) ;
 var myBasePrice = JSON.parse(readFile(process.argv[3]));
-myCart.print() ;
 
-console.log( myCart.itemArr[0].compare( myBasePrice[0] ) ) ;
-console.log( myCart.itemArr[0].compare( myBasePrice[1] ) ) ;
-console.log( myCart.itemArr[0].compare( myBasePrice[7] ) ) ;
+console.log( myCart.itemArr[0].cost( myBasePrice ) ) ;
+
 
 
 

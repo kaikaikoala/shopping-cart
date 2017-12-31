@@ -3,4 +3,5 @@ main.js implements 2 objects, 1 function, and the main script which executes the
 
 ## Running Tests
 Code run with [node](https://nodejs.org/en/download/) v4.2.6 
+To test code run test.sh
 
